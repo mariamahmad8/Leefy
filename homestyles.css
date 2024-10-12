@@ -1,6 +1,6 @@
 .header-bar-container{
   height: 75px;
-  background-color: #2b5134;
+  background-color: #24563b;;
   display: flex; 
 }
 
@@ -46,5 +46,34 @@ body{
 }
 
 .bottom-bar-container{
-    
+  display: flex; 
+  justify-content: center; 
+  position: fixed; 
+  bottom: 0px; 
+  right: 0px; 
+  left: 0px; 
+  
+  height: 75px; 
+  background-color: #24563b;;
+
+}
+
+.middle-button-container{
+  display: flex; 
+  justify-content: center; 
+  margin-top: 30px; 
+}
+
+.middle-sign-buttons{
+  padding-left: 20px; 
+  padding-right: 20px; 
+  padding-top: 10px; 
+  padding-bottom: 10px; 
+  border-radius: 400px; 
+  border-style: solid; 
+  border-color: #67AC78;
+  background-color: #24563b;; 
+  color: white; 
+  margin-left: 10px; 
+  cursor: pointer; 
 }

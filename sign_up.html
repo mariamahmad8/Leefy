@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="general.css">
+    <link rel="stylesheet" href="homestyles.css">
+    <link rel="stylesheet" href="sign_in.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <article>
+      <div class="header-bar-container">
+        <div class="left-header-container"></div>
+        <div class="homepage-button-container">
+          <a href="find_plants.html">
+            <button class="homepage-buttons">Find Plants</button>
+          </a>
+          <a href="my_plants.html">
+            <button class="homepage-buttons">My Plants</button>
+          </a>
+          <a href="schedule.html">
+            <button class="homepage-buttons">Schedule</button>
+          </a>
+        </div>
+        <div class="profile-bar-container"></div>
+      </div>
+
+      <div>
+        <p class="big-header-style">Sign Up</p>
+      </div>
+
+      <div style="display: flex; align-items: center; justify-content: center; margin-top: 50px;">
+        <div style="margin-top: 70px; margin-bottom: 20px;">
+
+          <form action="signup.php" method="post">
+
+            <label for = "name">
+              <input type="text" id="usernameId" class="input-text" placeholder="Username" name="name" required>
+            </label>
+            <label for = "email">
+              <input type="email" id="emailId" class="input-text" placeholder="Email" name="email" required>
+            </label>
+            <label for = "password">
+              <input type="password" id="passwordId" class="input-text" placeholder="Password" name="password" required>
+            </label>
+
+            <div style="display: flex; align-items: center; justify-content: center;">
+              <button class="middle-sign-buttons" id="signInButton" type="submit">Sign Up</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </article>
+  </body>
+</html>

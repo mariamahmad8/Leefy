@@ -1,0 +1,29 @@
+.user-info-text{
+  font-family: Roboto; 
+  color: #24563b;; 
+  font-size: 22px; 
+  margin-top: 50px; 
+}
+
+.input-text{
+  padding-top: 5px; 
+  padding-bottom: 5px; 
+  background-color: #67AC78;
+  width: 300px; 
+  padding-left: 10px; 
+  border-radius: 400px; 
+  display: block; 
+  border: solid; 
+  border-width: 3px; 
+  margin-bottom: 53px; 
+  color: white; 
+}
+
+.input-text::placeholder {
+  color: white; 
+}
+
+.input-text:focus {
+  outline: none; 
+  border-color: #24563b;; 
+}

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="homestyles.css">
+    <link rel="stylesheet" href="general.css">
+    <link rel="stylesheet" href="my_plants.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant Care</title>
+</head>
+<body>
+  <div class="header-bar-container">
+    <div class="left-header-container"></div>
+  
+    <div class="homepage-button-container">
+      <a href="find_plants.html">
+        <button class="homepage-buttons">Find Plants</button>
+      </a>
+      <a href="my_plants.html">
+        <button class="homepage-buttons">My Plants</button>
+      </a>
+      <a href="schedule.html">
+        <button class="homepage-buttons">Schedule</button>
+      </a>
+    </div>
+  
+    <div class="profile-bar-container"></div>
+  </div>
+
+  <div class="middle-info-holder">
+    <div class="my-plant-container"></div>
+
+    <div class="sort-by-container">
+      <div style="width: 200px; position: relative;">
+        <button id="add-plant-button" class="middle-sign-buttons" onclick="showEnterPlace();">Add Plant</button>
+        <div id="add-the-info" class="add-the-info">
+          <div class="add-plant-input">
+            <p style="font-size: 15px; color: white; font-weight: bold; margin: 10px; margin-top: 15px;">Information</p>
+            <input type="text" placeholder="Enter name" class="input-information">
+            <input type="text" placeholder="Location" class="input-information">
+            <input type="text" placeholder="Soil Type" class="input-information">
+
+            <div class="plant-type-container">
+              <p style="font-size: 15px; color: white; font-weight: bold; margin: 10px; margin-top: 15px;">Plant Type</p>
+              <div class="checkbox-wrapper">
+                <input class="type-of-plant-check" type="checkbox" id="plant1" name="plant1" value="Vegetables">
+                <label class="checkbox-label" for="plant1">Vegetables</label>
+              </div>
+              <div class="checkbox-wrapper">
+                <input class="type-of-plant-check" type="checkbox" id="plant2" name="plant2" value="Fruits">
+                <label class="checkbox-label" for="plant2">Fruits</label>
+              </div>
+              <div class="checkbox-wrapper">
+                <input class="type-of-plant-check" type="checkbox" id="plant3" name="plant3" value="Succulents">
+                <label class="checkbox-label" for="plant3">Succulents</label>
+              </div>
+              <div class="checkbox-wrapper">
+                <input class="type-of-plant-check" type="checkbox" id="plant4" name="plant4" value="Flowers">
+                <label class="checkbox-label" for="plant4">Flowers</label>
+              </div>
+              <div class="checkbox-wrapper">
+                <input class="type-of-plant-check" type="checkbox" id="plant5" name="plant5" value="Herbs">
+                <label class="checkbox-label" for="plant5">Herbs</label>
+              </div>
+              <div class="checkbox-wrapper">
+                <input class="type-of-plant-check" type="checkbox" id="plant6" name="plant6" value="Shrubs">
+                <label class="checkbox-label" for="plant6">Shrubs</label>
+              </div>
+            </div>
+          </div>
+
+          <div style="display: flex; flex-direction: column;">
+            <div style="flex: 1;">
+              <input type="file" title="your text" name="" id="plantimage">
+              <img class="plantImagePreview" src="#" id="plantImagePreview" style="display:none;">
+            </div>
+            <div style="height: 50px;">
+              <button class="middle-sign-buttons" id="submit-plant-button">Add Plant</button>
+              <button class="middle-sign-buttons" id="cancel-plant-button">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <button class="middle-sign-buttons">Sort By</button>
+      </div>
+    </div>
+
+    <div id="plant-care-info" style="margin-top: 20px; color: white;"></div>
+  </div>
+
+  <script>
+    function showEnterPlace() {
+      let addInfoContainer = document.getElementById('add-the-info');
+      addInfoContainer.classList.toggle('pressedAdd');
+    }
+
+    async function addThePlant() {
+      const inputs = document.querySelectorAll('.input-information');
+      const plantImage = document.getElementById('plantImagePreview');
+
+
+      if (inputs.length < 3) { 
+        return; 
+      }
+
+      const plantName = inputs[0].value; 
+      const plantLocation = inputs[1].value; 
+
+      
+
+        const newPlant = document.createElement('div');
+        newPlant.className = 'plant';
+        newPlant.innerHTML = `
+          <div class="plant-image-container">
+            <img class="plant-image" src="${plantImage.src}" alt="${plantName}">
+          </div>
+          <div class="plant-name-container">
+            <div class="plant-name">${plantName}</div>
+            <div class="location">${plantLocation}</div>
+          </div>
+        `;
+
+        const plantContainer = document.querySelector('.my-plant-container');
+        plantContainer.appendChild(newPlant);
+
+        inputs.forEach(input => input.value = '');
+        document.querySelector('.plantImagePreview').style.display = 'none'; 
+      
+    }
+
+    document.getElementById('submit-plant-button').addEventListener('click', function() {
+      addThePlant(); 
+    });
+
+    document.getElementById('cancel-plant-button').addEventListener('click', function() {
+      showEnterPlace(); 
+    });
+
+    plantimage.onchange = evt => {
+      const [file] = plantimage.files;
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+          const imgPreview = document.getElementById('plantImagePreview');
+          imgPreview.src = event.target.result;
+          imgPreview.style.display = 'block'; 
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+  </script>
+</body>
+</html>

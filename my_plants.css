@@ -1,0 +1,253 @@
+body{
+  font-family: Roboto; 
+}
+
+
+.my-plant-container {
+  width: 800px; 
+  height: 400px; 
+  background-color: #24563b;
+  display: grid; 
+  grid-template-columns: 200px 200px 200px 200px;
+  column-gap: 10px;
+  row-gap: 10px;
+  margin-left: 10px; 
+  border: solid; 
+  border-color: #24563b;
+  border-radius: 30px; 
+  
+  overflow: auto; 
+}
+
+.sort-by-container {
+  flex: 1; 
+  background-color: white; 
+  border-style: solid; 
+  border-radius: 30px; 
+  border-color: #24563b;
+}
+
+.middle-info-holder {
+  margin-top: 40px; 
+  display: flex;
+}
+
+.plant {
+  background-color: beige;
+  height: 170px; 
+  width: 170px; 
+  border-radius: 10px; 
+  cursor: pointer; 
+}
+
+.plant-image-container {
+  height: 120px; 
+  background-color: #67AC78;
+  display: flex;
+  justify-content: center;
+  
+}
+
+.plant-name-container {
+  height: 50px; 
+  background-color: #67AC78; 
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.plant-image {
+  width: 120px; 
+  height: 120px; 
+  object-fit: cover;
+}
+
+.plant-name, .location {
+  color:#24563b; 
+}
+
+.sort-by-container {
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+}
+
+.add-plant-button {
+  border-radius: 40px;
+  padding: 10px 20px; 
+  border-style: solid; 
+  font-size: 15px;
+}
+
+.add-the-info {
+  border-width: 10px; 
+  position: absolute;
+  width: 800px; 
+  height:500px; 
+  background-color: #24563b; 
+  top: -150px;
+  bottom: 0px; 
+  right: 80px; 
+  left: -100; 
+  opacity: 0; 
+  pointer-events: none; 
+  transition: opacity 0.5s ease; 
+  display: flex; 
+}
+
+.add-plant-input{
+  width: 200px; 
+  background-color: #24563b;
+
+}
+
+
+.add-the-info.pressedAdd {
+  opacity: 0.95; 
+  pointer-events: auto; 
+}
+
+
+.type-of-plant-check{
+  display: block;
+}
+
+.input-information{
+  padding-top: 5px; 
+  padding-bottom: 5px; 
+  background-color: #67AC78;
+  width: 160px; 
+  padding-left: 10px; 
+  border-radius: 400px; 
+  display: block; 
+  border: solid; 
+  border-width: 3px; 
+  margin-top: 10px; 
+  margin-left: 10px; 
+  color: white; 
+}
+
+.input-information::placeholder {
+  color: white; 
+}
+
+.input-information:focus {
+  outline: none; 
+  border-color: #24563b; 
+}
+
+
+
+.type-of-plant-check {
+  appearance: none; 
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  border-radius: 4px;
+  margin-left: 10px;
+  margin-top: 10px;
+  border: solid 3px;
+  border-color: #67AC78;
+  position: relative;
+  cursor: pointer;
+}
+
+.type-of-plant-check:checked {
+  background-color: #24563b; 
+}
+.type-of-plant-check::after {
+  content: '✓'; 
+  color: white;
+  font-size: 14px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+}
+
+.type-of-plant-check:checked::after {
+  display: block;
+}
+
+
+.checkbox-wrapper {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.type-of-plant-check {
+  appearance: none; 
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  border-radius: 4px;
+  margin-left: 10px;
+  border: solid 3px;
+  border-color: #67AC78;
+  position: relative;
+  cursor: pointer;
+}
+
+.type-of-plant-check:checked {
+  background-color: #24563b; 
+}
+
+.type-of-plant-check::after {
+  content: '✓'; 
+  color: white;
+  font-size: 14px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+}
+
+.type-of-plant-check:checked::after {
+  display: block;
+}
+
+.checkbox-label {
+  display: inline-block;
+  margin-left: 5px;
+  color: white;
+  font-size: 12px;
+  cursor: pointer;
+  margin-top: 8px
+}
+
+.plantImagePreview{
+  border: none; 
+  width: 300px; 
+  height: 300px; 
+  object-fit: cover;
+  display: block; 
+  margin-top: 40px; 
+  
+}
+
+
+input[type="file"]::file-selector-button {
+  padding-left: 20px; 
+  padding-right: 20px; 
+  padding-top: 10px; 
+  padding-bottom: 10px; 
+  border-radius: 400px; 
+  border-style: solid; 
+  border-color: #67AC78;
+  background-color: #24563b; 
+  color: white; 
+  margin-left: 10px; 
+  cursor: pointer; 
+  margin-top: 10px; 
+}
+
+#inputFile::-webkit-file-upload-button {
+  visibility: hidden;
+}
+
+
+

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="general.css">
+    <link rel="stylesheet" href="homestyles.css">
+    <link rel="stylesheet" href="sign_in.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    
+  </head>
+  <body>
+  <article>
+    <div class = "header-bar-container">
+      <div class = "left-header-container">
+    
+    
+      </div>
+    
+      <div class = "homepage-button-container">
+        <a href = "find_plants.html">
+          <button  class = "homepage-buttons" >Find Plants</button>
+        </a>
+        <a href = "my_plants.html">
+          <button  class = "homepage-buttons" >My Plants</button>
+        </a>
+        <a href = "schedule.html">
+          <button  class = "homepage-buttons" >Schedule</button>
+        </a>
+      </div>
+    
+      <div class = "profile-bar-container">
+      </div>
+    </div>
+
+   
+      <div>
+        <p class = "big-header-style">
+          Sign In
+        </p>
+      </div> 
+      <div>
+
+
+        <div style = "
+          display:flex;
+          align-items: center; 
+          justify-content: center;
+          margin-top: 50px; 
+        ">
+          
+          <div style = "
+            margin-top: 60px; 
+          ">
+            <input type = "text"  id = emailId class = "input-text" placeholder = "Email"required>
+            <input type = "text"  id = passwordId class = "input-text" placeholder = "Password" required>
+          </div>
+      </div>
+    
+      <div style = "
+        display: flex; 
+        align-items: center; 
+        justify-content: center;
+      ">
+      <a href = "sign_in.html">
+                <button  class = "middle-sign-buttons" id = "signInButton" >Sign In</button> 
+      </a>
+      </div>
+    </div>
+  </article>
+    <script>
+         const username = document.getElementById('usernameId');
+         const email = document.getElementById('emailId');
+         const password = document.getElementById('passwordId');
+         const passwordConfirm = document.getElementById('passwordConfirm');
+         const emailError = document.getElementById('emailOutput');
+         const passwordError = document.getElementById('passwordOutput');
+
+         function createAccount() {
+            event.preventDefault();
+            emailError.style.color = 'red';
+            passwordError.style.color = 'red';
+         }
+         signInButton.addEventListener('click',createAccount);
+          
+    </script>
+    
+  </body>
+</html>
