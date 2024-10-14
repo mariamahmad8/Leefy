@@ -31,23 +31,25 @@
 
       <div style="display: flex; align-items: center; justify-content: center; margin-top: 50px;">
         <div style="margin-top: 70px; margin-bottom: 20px;">
-
-          <form action="signup.php" method="post">
-
-            <label for = "name">
-              <input type="text" id="usernameId" class="input-text" placeholder="Username" name="name" required>
+          <form action="/signup" method="POST">
+            <label for="name">
+                <input type="text" id="usernameId" class="input-text" placeholder="Username" name="name" required>
             </label>
-            <label for = "email">
-              <input type="email" id="emailId" class="input-text" placeholder="Email" name="email" required>
+            <br>
+            <label for="email">
+                <input type="email" id="emailId" class="input-text" placeholder="Email" name="email" required>
             </label>
-            <label for = "password">
-              <input type="password" id="passwordId" class="input-text" placeholder="Password" name="password" required>
+            <br>
+            <label for="password">
+                <input type="password" id="passwordId" class="input-text" placeholder="Password" name="password" required>
             </label>
-
-            <div style="display: flex; align-items: center; justify-content: center;">
-              <button class="middle-sign-buttons" id="signInButton" type="submit">Sign Up</button>
+            <br>
+            <div style = "
+              display: flex; align-items: center; justify-content: center;
+            "class="center-button">
+                <button class="middle-sign-buttons" id="signInButton" type="submit">Submit</button>
             </div>
-          </form>
+        </form>
         </div>
       </div>
     </article>
