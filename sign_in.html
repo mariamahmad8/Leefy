@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" href="general.css">
-    <link rel="stylesheet" href="homestyles.css">
-    <link rel="stylesheet" href="sign_in.css">
+    <link rel="stylesheet" href="../static/general.css">
+    <link rel="stylesheet" href="../static/homestyles.css">
+    <link rel="stylesheet" href="../static/sign_in.css">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     
@@ -17,13 +17,13 @@
       </div>
     
       <div class = "homepage-button-container">
-        <a href = "find_plants.html">
+        <a href = "../templates/find_plants.html">
           <button  class = "homepage-buttons" >Find Plants</button>
         </a>
-        <a href = "my_plants.html">
+        <a href = "../templates/my_plants.html">
           <button  class = "homepage-buttons" >My Plants</button>
         </a>
-        <a href = "schedule.html">
+        <a href = "../templates/schedule.html">
           <button  class = "homepage-buttons" >Schedule</button>
         </a>
       </div>
@@ -47,23 +47,28 @@
           justify-content: center;
           margin-top: 50px; 
         ">
-          
           <div style = "
             margin-top: 60px; 
           ">
-            <input type = "text"  id = emailId class = "input-text" placeholder = "Email"required>
-            <input type = "text"  id = passwordId class = "input-text" placeholder = "Password" required>
-          </div>
+            <form action="/signin" method="POST">
+              <label for="email">
+                  <input type="email" id="emailId" class="input-text" placeholder="Email" name="email" required>
+              </label>
+              <br>
+              <label for="password">
+                  <input type="password" id="passwordId" class="input-text" placeholder="Password" name="password" required>
+              </label>
+              <br>
+              <div style = "
+                display: flex; align-items: center; justify-content: center;
+              "class="center-button">
+                  <button class="middle-sign-buttons" id="signInButton" type="submit">Submit</button>
+              </div>
+          </form>
+        </div>   
       </div>
     
-      <div style = "
-        display: flex; 
-        align-items: center; 
-        justify-content: center;
-      ">
-      <a href = "sign_in.html">
-                <button  class = "middle-sign-buttons" id = "signInButton" >Sign In</button> 
-      </a>
+      
       </div>
     </div>
   </article>
@@ -75,11 +80,11 @@
          const emailError = document.getElementById('emailOutput');
          const passwordError = document.getElementById('passwordOutput');
 
-         function createAccount() {
+         /*function createAccount() {
             event.preventDefault();
             emailError.style.color = 'red';
             passwordError.style.color = 'red';
-         }
+         }*/
          signInButton.addEventListener('click',createAccount);
           
     </script>
