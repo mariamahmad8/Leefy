@@ -1,33 +1,119 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <link rel="stylesheet" href="../static/general.css">
-    <link rel="stylesheet" href="../static/homestyles.css">
-      
-        
-  </head>
-  <body>
-    <div class = "header-bar-container">
-      <div class = "left-header-container">
+<head>
+  <link rel="stylesheet" href="../static/general.css">
+  <link rel="stylesheet" href="../static/homestyles.css">
+  <link rel="stylesheet" href="../static/schedule.css">
+  <link rel="icon" type="image/ico" href="/static/images/favicon.ico">
+  <link rel="stylesheet" href="../static/styles.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900&display=swap" rel="stylesheet">
+  <title>Schedule</title>
+</head>
+<body>
+    <div class="header-bar-container">
+        <div class="left-header-container">
+            <section>
+                <button type="submit" class="home-button">
+                    <a href="{{ url_for('home_page') }}">
+                        <img class="home-button-image" src="https://cdn.openart.ai/uploads/image_8oCo3Uc2_1729778639272_raw.jpg" />
+                    </a>
+                </button>
+            </section>
+        </div>
     
+        <div class="homepage-button-container">
+            <a href="{{ url_for('find_plants') }}">
+                <button class="homepage-buttons">Find Plants</button>
+            </a>
     
-      </div>
+            <a href="{{ url_for('my_plants') }}">
+                <button class="homepage-buttons">My Plants</button>
+            </a>
     
-      <div class = "homepage-button-container">
-        <a href = "../templates/find_plants.html">
-          <button  class = "homepage-buttons" >Find Plants</button>
-        </a>
-        <a href = "../templates/my_plants.html">
-          <button  class = "homepage-buttons" >My Plants</button>
-        </a>
-        <a href = "../templates/schedule.html">
-          <button  class = "homepage-buttons" >Schedule</button>
-        </a>
-      </div>
+            <a href="{{ url_for('schedule') }}">
+                <button class="homepage-buttons">Schedule</button>
+            </a>
+        </div>
     
-      <div class = "profile-bar-container">
-      </div>
+        <div class="profile-bar-container">
+            <a href="{{ url_for('logout') }}">
+                <button class="logout">Log out</button>
+            </a>
+        </div>
     </div>
     
-  </body>
+    
+
+
+  <div class="middle-container">
+	<div class="calendar-container">
+  	<div class="today-header">
+    	<div style="color: #ffffff;">Today</div>
+  	</div>
+  	<ul id="list-container">
+    	{% if plants_to_water %}
+      	{% for plant in plants_to_water %}
+        	<li class="plant-item"
+            	data-id="{{ plant[0] }}"
+            	data-name="{{ plant[1] }}"
+            	data-location="{{ plant[2] }}"
+            	data-soil="{{ plant[3] }}"
+            	data-date-planted="{{ plant[4] }}"
+            	data-water-frequency="{{ plant[5] }}"
+            	data-image="{{ plant[7] }}">
+          	<div class="checkbox"></div>
+          	<span class="task-text">{{ plant[1] }}</span>
+        	</li>
+      	{% endfor %}
+    	{% else %}
+      	<li>No plants need watering today!</li>
+    	{% endif %}
+  	</ul>
+	</div>
+
+
+	<div class="selected-plant-container">
+  	<h2>Plant Information 🪴</h2>
+  	<p>Press on a plant to see information</p>
+	</div>
+  </div>
+
+
+  <script>
+	const listContainer = document.getElementById('list-container');
+	listContainer.addEventListener('click', function(e) {
+  	if (e.target.classList.contains('checkbox')) {
+    	const listItem = e.target.parentElement;
+    	listItem.classList.toggle('checked');
+  	}
+	});
+
+
+	document.querySelectorAll('.plant-item').forEach(item => {
+  	item.addEventListener('click', function() {
+    	const plantName = this.getAttribute('data-name');
+    	const plantLocation = this.getAttribute('data-location');
+    	const soilType = this.getAttribute('data-soil');
+    	const datePlanted = this.getAttribute('data-date-planted');
+    	const waterFrequency = this.getAttribute('data-water-frequency');
+    	const plantImage = this.getAttribute('data-image');
+
+
+    	document.querySelector('.selected-plant-container').innerHTML = `
+      	<h2>${plantName}</h2>
+      	
+      	<p><strong>Location:</strong> ${plantLocation}</p>
+      	<p><strong>Soil Type:</strong> ${soilType}</p>
+      	<p><strong>Date Planted:</strong> ${datePlanted}</p>
+      	<p><strong>Watering Frequency:</strong> Every ${waterFrequency} days</p>
+    	`;
+  	});
+	});
+  </script>
+</body>
 </html>
+
+
+
+

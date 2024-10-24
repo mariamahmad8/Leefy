@@ -3,26 +3,40 @@
   <head>
     <link rel="stylesheet" href="../static/general.css">
     <link rel="stylesheet" href="..//static/homestyles.css">
+    <link rel="icon" type="image/ico" href="/static/images/favicon.ico">
     <link rel="stylesheet" href="..//static/sign_in.css">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap" rel="stylesheet">
+    <title>Sign Up</title>
   </head>
   <body>
     <article>
-      <div class="header-bar-container">
-        <div class="left-header-container"></div>
-        <div class="homepage-button-container">
-          <a href="../templates/find_plants.html">
-            <button class="homepage-buttons">Find Plants</button>
-          </a>
-          <a href="../templates/my_plants.html">
-            <button class="homepage-buttons">My Plants</button>
-          </a>
-          <a href="../templates/schedule.html">
-            <button class="homepage-buttons">Schedule</button>
-          </a>
-        </div>
-        <div class="profile-bar-container"></div>
+        <div class="header-bar-container">
+          <div class="left-header-container">
+              <section>
+                  <button type="submit" class="home-button">
+                      <a href="{{ url_for('home_page') }}">
+                          <img class="home-button-image" src="https://cdn.openart.ai/uploads/image_8oCo3Uc2_1729778639272_raw.jpg" />
+                      </a>
+                  </button>
+              </section>
+          </div>
+      
+          <div class="homepage-button-container">
+              <a href="{{ url_for('find_plants') }}">
+                  <button class="homepage-buttons">Find Plants</button>
+              </a>
+      
+              <a href="{{ url_for('my_plants') }}">
+                  <button class="homepage-buttons">My Plants</button>
+              </a>
+      
+              <a href="{{ url_for('schedule') }}">
+                  <button class="homepage-buttons">Schedule</button>
+              </a>
+          </div>
+      
+          <div class="profile-bar-container"></div>
       </div>
 
       <div>

@@ -10,35 +10,43 @@
     <link rel="stylesheet" href="../static/homestyles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="stylesheet" href="../static/general.css">
+    <link rel="icon" type="image/ico" href="/static/images/favicon.ico">
     
-    
-    <!--Paste font links here-->
+  
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
   </head>
 
   <body>
-      <div class = "header-bar-container">
-        <div class = "left-header-container">
-      
-      
-        </div>
-      
-        <div class = "homepage-button-container">
-          <a href = "../templates/find_plants.html">
-            <button  class = "homepage-buttons" >Find Plants</button>
-          </a>
-          <a href = "../templates/my_plants.html">
-            <button  class = "homepage-buttons" >My Plants</button>
-          </a>
-          <a href = "../templates/schedule.html">
-            <button  class = "homepage-buttons" >Schedule</button>
-          </a>
-        </div>
-      
-        <div class = "profile-bar-container">
-        </div>
+    <div class="header-bar-container">
+      <div class="left-header-container">
+          <section>
+              <button type="submit" class="home-button">
+                  <a href="{{ url_for('home_page') }}">
+                      <img class="home-button-image" src="https://cdn.openart.ai/uploads/image_8oCo3Uc2_1729778639272_raw.jpg" />
+                  </a>
+              </button>
+          </section>
       </div>
+  
+      <div class="homepage-button-container">
+          <a href="{{ url_for('find_plants') }}">
+              <button class="homepage-buttons">Find Plants</button>
+          </a>
+  
+          <a href="{{ url_for('my_plants') }}">
+              <button class="homepage-buttons">My Plants</button>
+          </a>
+  
+          <a href="{{ url_for('schedule') }}">
+              <button class="homepage-buttons">Schedule</button>
+          </a>
+      </div>
+  
+       <div class="profile-bar-container">
+       
+    </div>
+  </div>
     
       <div class = "middle-info-container">
         <div class = "middle-text-container">
@@ -55,20 +63,19 @@
           <p style = "
             font-family: Roboto; 
             text-align: center; 
-            margin: 0; 
+            margin-top: 40px; 
             font-size: 30px; 
           
-          "> Leefy aims to create a more sustainable world by <br>helping people 
-          create their ideal home gardens <br> with ease !</p>
+          "> Leefy aims to help people create<br> their ideal home gardens <br> with ease !</p>
 
         </div>
         
         <div class = "middle-button-container"> 
-            <a href = "sign_up.html">
+            <a href="{{ url_for('signup') }}">
               <button  class = "middle-sign-buttons" >Sign Up</button>
             </a>
             
-            <a href = "sign_in.html">
+            <a href="{{ url_for('signin') }}">
               <button  class = "middle-sign-buttons" >Sign In</button> 
             </a>
             
@@ -76,7 +83,6 @@
       </div>
 
       <div class = "bottom-bar-container">
-        rat
       </div>
     </div>
   

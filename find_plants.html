@@ -1,33 +1,274 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <title>Find Plants</title>
     <link rel="stylesheet" href="../static/general.css">
     <link rel="stylesheet" href="../static/homestyles.css">
+    <link rel="stylesheet" href="../static/find_plants.css">
+    <link rel="icon" type="image/ico" href="/static/images/favicon.ico">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
   
   </head>
   <body>
-    <div class = "header-bar-container">
-      <div class = "left-header-container">
     
-    
+    <div class="header-bar-container">
+      <div class="left-header-container">
+          <section>
+              <button type="submit" class="home-button">
+                  <a href="{{ url_for('home_page') }}">
+                      <img class="home-button-image" src="https://cdn.openart.ai/uploads/image_8oCo3Uc2_1729778639272_raw.jpg" />
+                  </a>
+              </button>
+          </section>
       </div>
-    
-      <div class = "homepage-button-container">
-        <a href = "../templates/find_plants.html">
-          <button  class = "homepage-buttons" >Find Plants</button>
-        </a>
-        <a href = "../templates/my_plants.html">
-          <button  class = "homepage-buttons" >My Plants</button>
-        </a>
-        <a href = "../templates/schedule.html">
-          <button  class = "homepage-buttons" >Schedule</button>
-        </a>
+  
+      <div class="homepage-button-container">
+          <a href="{{ url_for('find_plants') }}">
+              <button class="homepage-buttons">Find Plants</button>
+          </a>
+  
+          <a href="{{ url_for('my_plants') }}">
+              <button class="homepage-buttons">My Plants</button>
+          </a>
+  
+          <a href="{{ url_for('schedule') }}">
+              <button class="homepage-buttons">Schedule</button>
+          </a>
       </div>
-    
-      <div class = "profile-bar-container">
-      </div>
+  
+      <div class="profile-bar-container">
+       
     </div>
-    
+  </div>
+
+    <!--<article>       
+      <input type  = "text" id = "zipcodeId" class = "input-text" style = "text-align: center" placeholder = "Enter your zip code" maxlength = "10">    
+      <input type = "button" id = "btn1" value = "Click Me">
+      <p class = "output" id = "outputId"></p>
+      <button id = "myButton" >Click</button>
+    </article>-->
+    <container class = "main-div">
+      <div class = "left-div">
+        <div class = "hero">
+            <p style = "color:#24563b;" id = "noticeId">Enter info to find your ideal plants</p>
+            <div class = "container">
+              <p>Zipcode:</p>
+              <input class = "input-styles"  type = "text" placeholder = "Enter your zip code" id = "zipId" maxlength = "10">
+              <p>Edible:</p>
+              <select class = "input-styles" name="edible" id="edibleId">
+                  <option value="true">edible</option>
+                  <option value="false">not edible</option>
+              </select>
+              <p>Amount of sunlight available:</p>
+              <select class = "input-styles" name="sunlight" id="sunlightId">
+                  <option value="part_shade">partial shade</option>
+                  <option value="full_sun">full sun</option>
+              </select>
+
+              <p>Amount of water available:</p>
+              <select class = "input-styles"  name="water" id="waterId">
+                  <option value="frequent">frequent</option>
+                  <option value="average">average</option>
+                  <option value="minimum">minimum</option>
+                  <option value="none">none</option>
+              </select>
+            </div>
+           
+            <button style = "
+            padding-top: 5px;
+            padding-bottom: 5px;
+            background-color: #24563b;
+            border-color: #63AC78;
+            padding-left: 10px;
+            padding-right: 10px; 
+            border-radius: 400px;
+            border: solid;
+            border-width: 4px;
+            margin-top: 10px;
+            margin-left: -10px;
+            margin-bottom: 20px;
+            color: white;
+            width: 160px;
+            cursor: pointer;
+            
+            " id = "btn1">Submit</button>
+        </div>
+      </div>
+      <div class = "middle-div">
+        <div class = "hero">
+          <div class = "info-container">
+            <div style = "border-radius: 40px; "id = "imageId" class = "image-container">
+              <img style = "border-radius: 40px;"id = "plantImg" src = "https://wallpapers.com/images/featured/blank-white-7sn5o1woonmklx1h.jpg">
+            </div>
+            <div style = "margin-top: 20px; "class = "bottom-container">
+              <p id = "namePlantId"></p>
+              <p id = "waterPlantId"></p>
+              <p id = "sunPlantId"></p>
+            </div>
+          </div>
+          <button class = "input-styles"id = "nextBtn">Next Plant</button>
+        </div>
+      </div>
+    </container>
+    <script type = "importmap">
+      {
+        "imports":{
+          "@google/generative-ai": "https://esm.run/@google/generative-ai"
+        }
+      }
+    </script>
+    <script type = "module">
+      const notice = document.getElementById('noticeId');
+      const image = document.getElementById('plantImg');
+      document.getElementById('btn1').addEventListener('click', hello); 
+      import {GoogleGenerativeAI} from "@google/generative-ai"; 
+      const API_KEY  = "AIzaSyBd-6Qr_3Lk7A_n0DwHpVwQ-cDRC4Ypzug"; 
+      const genAI = new GoogleGenerativeAI(API_KEY); 
+      let info = {};
+      let infoIndex = 0;
+      let length = 0;
+      async function hello(){
+        let zipcode = document.getElementById('zipId');
+        let locationInfo = document.getElementById('locationId');
+        let edibleInfo = document.getElementById('edibleId');
+        let waterInfo = document.getElementById('waterId');
+        let sunInfo = document.getElementById('sunlightId');
+        let model = genAI.getGenerativeModel({model:"gemini-pro"}); 
+        let prompt = "What is the hardness zone for the zip code " + zipcode.value + " answer with only the number"; 
+        let result = await model.generateContent(prompt); 
+        let response = await result.response; 
+        let text = response.text(); 
+        console.log(text); 
+        let hardnessZone = text;
+        let edibleVal = edibleInfo.value;
+        let waterVal = waterInfo.value;
+        let sunVal = sunInfo.value;
+        getPerenualInfo(hardnessZone, edibleVal, waterVal, sunVal)
+      }
+      
+      async function getPerenualInfo(hardnessZone, edibleVal, waterVal, sunVal) {
+        const baseUrl = "https://perenual.com";
+        const keyCode = "sk-1soh671949ee416927402";
+        const url = baseUrl + "/api/species-list?key=" + keyCode + "&edible=" + edibleVal + "&watering=" + waterVal + "&sunlight=" + sunVal  + "&hardiness=" + hardnessZone;
+        const response = await fetch(url);
+        info = await response.json();
+        length = info.data.length;
+        console.log(info);
+        showInfo(0)
+      }
+
+      function showInfo(pos) {
+        if(info.data.length == 0) {
+          notice.innerHTML = "No plants with these characteristics found";
+        }
+        else {
+          console.log("IN");
+          console.log(pos);
+          if((info.data[pos].default_image != null && info.data[pos].default_image.original_url != null) && !info.data[pos].default_image.original_url.includes("upgrade_access")) {
+            image.src = info.data[pos].default_image.original_url;
+          }
+          else {
+            console.log("ENTEREDINOTHER");
+            image.src = "https://ih1.redbubble.net/image.4905811447.8675/flat,750x,075,f-pad,750x1000,f8f8f8.jpg";
+          }
+          const namePlant = document.getElementById("namePlantId");
+          const waterPlant = document.getElementById("waterPlantId");
+          const sunPlant = document.getElementById("sunPlantId");
+          namePlant.innerHTML = "Name: " + info.data[pos].common_name;
+          waterPlant.innerHTML = "Water needed: " + info.data[pos].watering;
+          sunPlant.innerHTML = "Sunlight: " + info.data[pos].sunlight;
+        }
+      }
+      document.getElementById('nextBtn').addEventListener('click', change); 
+      async function change() {
+        console.log("increment");
+        infoIndex++;
+        console.log(infoIndex);
+        if(infoIndex<length) {
+          showInfo(infoIndex);
+        }
+        else {
+          showInfo(0);
+          infoIndex = 0;
+        }
+      }
+
+
+    </script>
+      <!--<ul id="list-container">
+          <li>
+              <div class="checkbox"></div>
+              <span class="task-text">task 1</span>
+          </li>
+          <p>How much space do you have available?</p>
+              <label>
+                  <input type = "checkbox" name = "little">
+              </label>
+          </li>
+          <li>
+              <div class="checkbox"></div>
+              <span class="task-text">task 3</span>
+          </li>
+      </ul>
+     </div>
+    <script type = "importmap">
+      {
+        "imports":{
+          "@google/generative-ai": "https://esm.run/@google/generative-ai"
+        }
+      }
+    </script>
+    <script type = "module">
+
+      document.getElementById('btn1').addEventListener('click', hello); 
+      import {GoogleGenerativeAI} from "@google/generative-ai"; 
+      const API_KEY  = "AIzaSyBd-6Qr_3Lk7A_n0DwHpVwQ-cDRC4Ypzug"; 
+      const genAI = new GoogleGenerativeAI(API_KEY); 
+      
+      async function hello(){
+        const zipcode = document.getElementById('zipcodeId');
+        const model = genAI.getGenerativeModel({model:"gemini-pro"}); 
+        const prompt = "What is the hardness zone for the zip code " + zipcode.value + " answer with only the number"; 
+        const result = await model.generateContent(prompt); 
+        const response = await result.response; 
+        const text = response.text(); 
+        console.log(text); 
+      }
+
+      async function getZone(zip) {
+        const puppeteer = require('puppeteer');
+        async function start() {
+          const browser = await puppeteer.launch()
+          const page = await browser.newPage()
+          await page.goto("")
+          await browser.close()
+        }
+        await page.type("monrovia_plantfinder_zipcode", zipcode.value)
+      }
+    </script>
+    <script>
+      const listContainer = document.getElementById('list-container');
+  
+      listContainer.addEventListener('click', function(e) {
+          if (e.target.classList.contains('checkbox')) {
+              const listItem = e.target.parentElement; 
+              listItem.classList.toggle('checked'); 
+          }
+      });
+  </script>
+  <script>
+    const url = 'https://perenual.com/api/species-list?key=sk-KMeT67153ab76b3a77350&page=1'
+    async function getData() {
+      const response = await fetch(url);
+      const info = await response.json();
+      console.log(info)
+      console.log(info.data[0]);
+    }
+    getData();
+  </script>-->
   </body>
 </html>

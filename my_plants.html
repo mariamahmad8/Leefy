@@ -1,157 +1,234 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="../static/homestyles.css">
-    <link rel="stylesheet" href="../static/general.css">
-    <link rel="stylesheet" href="../static/my_plants.css">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-    
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plant Care</title>
+  <link rel="stylesheet" href="../static/homestyles.css">
+  <link rel="stylesheet" href="../static/general.css">
+  <link rel="stylesheet" href="../static/my_plants.css">
+  <link rel="icon" type="image/ico" href="/static/images/favicon.ico">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Plants</title>
 </head>
 <body>
   <div class="header-bar-container">
-    <div class="left-header-container"></div>
-  
+    <div class="left-header-container">
+        <section>
+            <button type="submit" class="home-button">
+                <a href="{{ url_for('home_page') }}">
+                    <img class="home-button-image" src="https://cdn.openart.ai/uploads/image_8oCo3Uc2_1729778639272_raw.jpg" />
+                </a>
+            </button>
+        </section>
+    </div>
+
     <div class="homepage-button-container">
-      <a href="../templates/find_plants.html">
-        <button class="homepage-buttons">Find Plants</button>
-      </a>
-      <a href="../templates/my_plants.html">
-        <button class="homepage-buttons">My Plants</button>
-      </a>
-      <a href="../templates/schedule.html">
-        <button class="homepage-buttons">Schedule</button>
-      </a>
-    </div>
-  
-    <div class="profile-bar-container"></div>
-  </div>
+        <a href="{{ url_for('find_plants') }}">
+            <button class="homepage-buttons">Find Plants</button>
+        </a>
 
+        <a href="{{ url_for('my_plants') }}">
+            <button class="homepage-buttons">My Plants</button>
+        </a>
+
+        <a href="{{ url_for('schedule') }}">
+            <button class="homepage-buttons">Schedule</button>
+        </a>
+    </div>
+
+    <div class="profile-bar-container">
+      <a href="{{ url_for('logout') }}">
+          <button class="logout">Log out</button>
+      </a>
+  </div>
+    
+</div>
   <div class="middle-info-holder">
-    <div class="my-plant-container"></div>
+	<div class="my-plant-container">
+  	{% for plant in plants %}
+  	<div class="plant" data-id="{{ plant[0] }}">
+    	<div class="plant-image-container" style="position: relative;">
+      	<button class="remove-plant" data-id="{{ plant[0] }}" style="position: absolute; top: 0; left: 0; z-index: 10; background: none; border: none; color: white; font-size: 20px; cursor: pointer;"> &times;</button>
+      	<img class="plant-image" src="{{ url_for('uploaded_file', filename=plant[8].split('/')[-1]) }}" alt="{{ plant[1] }}" style="max-width: 100%; height: auto;">
+    	</div>
+    	<div class="plant-name-container">
+      	<div class="plant-name">{{ plant[1] }}</div>
+      	<div class="location">{{ plant[2] }}</div>
+    	</div>
+  	</div>
+  	{% endfor %}
+	</div>
 
-    <div class="sort-by-container">
-      <div style="width: 200px; position: relative;">
-        <button id="add-plant-button" class="middle-sign-buttons" onclick="showEnterPlace();">Add Plant</button>
-        <div id="add-the-info" class="add-the-info">
-          <div class="add-plant-input">
-            <p style="font-size: 15px; color: white; font-weight: bold; margin: 10px; margin-top: 15px;">Information</p>
-            <input type="text" placeholder="Enter name" class="input-information">
-            <input type="text" placeholder="Location" class="input-information">
-            <input type="text" placeholder="Soil Type" class="input-information">
+	<div class="sort-by-container">
+  	<div style="width: 200px; position: relative;">
+    	<button id="add-plant-button" class="options-button">Add Plant</button>
+    	<div id="add-the-info" class="add-the-info">
+      	<div class="add-plant-input">
+        	<p style="font-size: 15px; color: #24563b; font-weight: bold; margin: 10px; margin-top: 15px;">Information</p>
+        	<form id="plantForm" enctype="multipart/form-data">
+          	<input type="text" id="plantName" placeholder="Enter name" class="input-information" name="plant_name" required>
+          	<input type="text" id="plantLocation" placeholder="Location" class="input-information" name="plant_location" required>
+          	<input type="text" id="soilType" placeholder="Soil Type" class="input-information" name="soil_type" required>
 
-            <div class="plant-type-container">
-              <p style="font-size: 15px; color: white; font-weight: bold; margin: 10px; margin-top: 15px;">Plant Type</p>
-              <div class="checkbox-wrapper">
-                <input class="type-of-plant-check" type="checkbox" id="plant1" name="plant1" value="Vegetables">
-                <label class="checkbox-label" for="plant1">Vegetables</label>
-              </div>
-              <div class="checkbox-wrapper">
-                <input class="type-of-plant-check" type="checkbox" id="plant2" name="plant2" value="Fruits">
-                <label class="checkbox-label" for="plant2">Fruits</label>
-              </div>
-              <div class="checkbox-wrapper">
-                <input class="type-of-plant-check" type="checkbox" id="plant3" name="plant3" value="Succulents">
-                <label class="checkbox-label" for="plant3">Succulents</label>
-              </div>
-              <div class="checkbox-wrapper">
-                <input class="type-of-plant-check" type="checkbox" id="plant4" name="plant4" value="Flowers">
-                <label class="checkbox-label" for="plant4">Flowers</label>
-              </div>
-              <div class="checkbox-wrapper">
-                <input class="type-of-plant-check" type="checkbox" id="plant5" name="plant5" value="Herbs">
-                <label class="checkbox-label" for="plant5">Herbs</label>
-              </div>
-              <div class="checkbox-wrapper">
-                <input class="type-of-plant-check" type="checkbox" id="plant6" name="plant6" value="Shrubs">
-                <label class="checkbox-label" for="plant6">Shrubs</label>
-              </div>
-            </div>
-          </div>
+          	<div class="plant-type-container">
+            	<p style="font-size: 15px; color: #24563b; font-weight: bold; margin: 10px; margin-top: 15px;">Type of Plant</p>
+            	<select class="plant-type" name="plant-type" id="plant-type">
+              	<option value="Vegetable">Vegetable</option>
+              	<option value="Flower">Flower</option>
+              	<option value="Herb">Herb</option>
+              	<option value="Cacti">Cacti</option>
+              	<option value="Fruit">Fruit</option>
+              	<option value="House-Plant">House-Plant</option>
+            	</select>
 
-          <div style="display: flex; flex-direction: column;">
-            <div style="flex: 1;">
-              <input type="file" title="your text" name="" id="plantimage">
-              <img class="plantImagePreview" src="#" id="plantImagePreview" style="display:none;">
-            </div>
-            <div style="height: 50px;">
-              <button class="middle-sign-buttons" id="submit-plant-button">Add Plant</button>
-              <button class="middle-sign-buttons" id="cancel-plant-button">Cancel</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div>
-        <button class="middle-sign-buttons">Sort By</button>
-      </div>
-    </div>
+            	<div style="height: 50px;">
+              	<button type="submit" class="adding-plant-info-button" id="submit-plant-button">Add Plant</button>
+              	<button class="adding-plant-info-button" id="cancel-plant-button" type="button">Cancel</button>
+            	</div>
 
-    <div id="plant-care-info" style="margin-top: 20px; color: white;"></div>
+            	<div style="display: flex; flex-direction: column;">
+              	<div style="flex: 1;">
+                	<p style="font-size: 15px; color: #24563b; font-weight: bold; margin: 10px; margin-top: 15px;">Upload an image</p>
+                	<input class="upload-plant-image" type="file" title="upload an image" id="upload-plant-image" accept="image/*">
+                	<img id="plantImagePreview" style="max-width: 100%; height: auto; display: none;" />
+              	</div>
+            	</div>
+          	</div>
+        	</form>
+      	</div>
+    	</div>
+  	</div>
+	</div>
   </div>
 
-  <script>
-    function showEnterPlace() {
-      let addInfoContainer = document.getElementById('add-the-info');
-      addInfoContainer.classList.toggle('pressedAdd');
-    }
+  <div id="plant-care-info" style="margin-top: 20px; color: white;"></div>
 
-    async function addThePlant() {
-      const inputs = document.querySelectorAll('.input-information');
-      const plantImage = document.getElementById('plantImagePreview');
-
-
-      if (inputs.length < 3) { 
-        return; 
-      }
-
-      const plantName = inputs[0].value; 
-      const plantLocation = inputs[1].value; 
-
-      
-
-        const newPlant = document.createElement('div');
-        newPlant.className = 'plant';
-        newPlant.innerHTML = `
-          <div class="plant-image-container">
-            <img class="plant-image" src="${plantImage.src}" alt="${plantName}">
-          </div>
-          <div class="plant-name-container">
-            <div class="plant-name">${plantName}</div>
-            <div class="location">${plantLocation}</div>
-          </div>
-        `;
-
-        const plantContainer = document.querySelector('.my-plant-container');
-        plantContainer.appendChild(newPlant);
-
-        inputs.forEach(input => input.value = '');
-        document.querySelector('.plantImagePreview').style.display = 'none'; 
-      
-    }
-
-    document.getElementById('submit-plant-button').addEventListener('click', function() {
-      addThePlant(); 
-    });
-
-    document.getElementById('cancel-plant-button').addEventListener('click', function() {
-      showEnterPlace(); 
-    });
-
-    plantimage.onchange = evt => {
-      const [file] = plantimage.files;
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function(event) {
-          const imgPreview = document.getElementById('plantImagePreview');
-          imgPreview.src = event.target.result;
-          imgPreview.style.display = 'block'; 
-        };
-        reader.readAsDataURL(file);
-      }
-    }
+  <script type="importmap">
+	{
+  	"imports": {
+    	"@google/generative-ai": "https://esm.run/@google/generative-ai"
+  	}
+	}
   </script>
+
+  <script type="module">
+	import { GoogleGenerativeAI } from "@google/generative-ai";
+	const API_KEY  = "AIzaSyBd-6Qr_3Lk7A_n0DwHpVwQ-cDRC4Ypzug";
+	const genAI = new GoogleGenerativeAI(API_KEY);
+
+	let wateringFrequency = null; 
+
+	async function water_freq(name){
+  	console.log("plant name: " + name);
+  	let model = genAI.getGenerativeModel({model:"gemini-pro"});
+  	
+    let prompt = `Based on common watering schedules for ${name} what number of days should pass between each watering? (if answer is range like a-b, ALWAYS ONLY choose the smaller number) `;
+
+  	try {
+    	let result = await model.generateContent(prompt);
+    	let response = await result.response;
+    	let text = await response.text();
+    	wateringFrequency = text.trim();
+    	console.log("watering frequency: ", wateringFrequency);
+  	} catch (error) {
+    	console.error("error: ", error);
+    	wateringFrequency = "N/A";
+  	}
+	}
+
+	
+	document.getElementById('plantName').addEventListener('change', async function() {
+  	const plantName = this.value;
+  	if (plantName.trim()) {
+    	const submitButton = document.getElementById('submit-plant-button');
+    	submitButton.disabled = true;
+    	await water_freq(plantName);
+    	submitButton.disabled = false;
+  	}
+	});
+
+	document.getElementById('add-plant-button').addEventListener('click', function() {
+  	let addInfoContainer = document.getElementById('add-the-info');
+  	addInfoContainer.classList.toggle('pressedAdd');
+	});
+
+	document.getElementById('cancel-plant-button').addEventListener('click', function() {
+  	let addInfoContainer = document.getElementById('add-the-info');
+  	addInfoContainer.classList.remove('pressedAdd');
+	});
+
+	document.getElementById('plantForm').addEventListener('submit', function(event) {
+  	event.preventDefault();
+  	const fileInput = document.getElementById('upload-plant-image');
+  	const file = fileInput.files[0];
+  	if (file) {
+    	const reader = new FileReader();
+    	reader.onload = function(e) {
+      	createInfoObject();
+    	};
+    	reader.readAsDataURL(file);
+  	} else {
+    	alert("Please upload an image of the plant!");
+  	}
+	});
+
+	function createInfoObject() {
+  	var name = document.getElementById('plantName').value;
+  	var location = document.getElementById('plantLocation').value;
+  	var soilType = document.getElementById('soilType').value;
+  	var plantType = document.getElementById('plant-type').value;
+  	var imageAddress = document.getElementById('upload-plant-image').files[0];
+
+  	let formData = new FormData();
+  	formData.append('name', name);
+  	formData.append('location', location);
+  	formData.append('soilType', soilType);
+  	formData.append('plantType', plantType);
+  	formData.append('imageAddress', imageAddress);
+
+  	if (wateringFrequency) {
+    	formData.append('wateringFrequency', wateringFrequency);
+  	} else {
+    	alert("watering freq not avaialbe");
+    	return;
+  	}
+
+  	fetch('/addplant', {
+    	method: 'POST',
+    	body: formData
+  	})
+  	.then(response => response.text())
+  	.then(data => {
+    	console.log(data);
+    	window.location.reload();
+  	})
+  	.catch(error => {
+    	console.error('error', error);
+  	});
+	}
+
+	function addDeleteEventListeners() {
+  	document.querySelectorAll('.remove-plant').forEach(button => {
+    	button.addEventListener('click', function() {
+      	const plantId = this.getAttribute('data-id');
+      	fetch(`/delete_plant/${plantId}`, {
+        	method: 'POST'
+      	})
+      	.then(response => response.text())
+      	.then(data => {
+        	this.closest('.plant').remove();
+        	console.log('plant deleted');
+      	})
+      	.catch(err => console.error('error deleting plant', err));
+    	});
+  	});
+	}
+
+	document.addEventListener('DOMContentLoaded', addDeleteEventListeners);
+  </script>
+
 </body>
 </html>
+
+

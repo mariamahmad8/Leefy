@@ -9,7 +9,7 @@ body{
 }
 
 .left-header-container{
-  background-color: red; 
+  background-color: #24563b; 
   width: 200px; 
 }
 
@@ -20,10 +20,46 @@ body{
     flex: 1;
 }
 
+.home-button-image {
+  /*width: 500px;*/
+  filter: grayscale(70%);
+  height: 100%;
+  width: 100%;
+  height: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/*.home-button{
+  position: absolute;
+  top: 50px;
+  left: 50px;
+}*/
+
+.home-button{
+  height: 70px;
+  width: 70px;
+  position: relative;
+  top: 2px;
+  left: 10px;
+  background-color:#24563b;
+}
+
+.section{
+  position: relative;
+}
+
 .profile-bar-container{
-  background-color: yellow; 
+  background-color: #24563b; 
   width: 200px; 
 }
+
+
+.middle-info-containers{
+  margin-top: 100px; 
+}
+
 
 .homepage-buttons{
   
@@ -61,7 +97,7 @@ body{
 .middle-button-container{
   display: flex; 
   justify-content: center; 
-  margin-top: 30px; 
+  margin-top: 90px; 
 }
 
 .middle-sign-buttons{
@@ -76,4 +112,19 @@ body{
   color: white; 
   margin-left: 10px; 
   cursor: pointer; 
+}
+
+.logout{
+  padding-left: 20px; 
+  padding-right: 20px; 
+  padding-top: 10px; 
+  padding-bottom: 10px; 
+  border-radius: 400px; 
+  border-style: solid; 
+  border-color: #67AC78;
+  background-color: #24563b;; 
+  color: white; 
+  margin-left: 10px; 
+  cursor: pointer; 
+  margin-top: 15px; 
 }
